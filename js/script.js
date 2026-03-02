@@ -1,42 +1,42 @@
 // Dungeon Loot Splitter - script.js
 
-// Array to store loot items - declared at top so it persists across button clicks
+// array to store loot items - declared at top so it persists across button clicks
 var lootItems = [];
 
 // Event listeners registered in script.js
 document.getElementById("addLootBtn").addEventListener("click", addLoot);
 document.getElementById("splitLootBtn").addEventListener("click", splitLoot);
 
-// Add a loot item to the array
+// adding loot items in the array
 function addLoot() {
 
-    // Clear previous error
+    // clearing old errors
     document.getElementById("lootError").textContent = "";
 
-    // Read input values
+    // understanding input value
     var name = document.getElementById("lootName").value.trim();
     var valueInput = document.getElementById("lootValue").value.trim();
     var value = parseFloat(valueInput);
 
-    // Validate: name must not be empty
+    // validating loot input
     if (name === "") {
         document.getElementById("lootError").textContent = "Please enter a loot name.";
         return;
     }
 
-    // Validate: value must be a valid number
+    // validating number input
     if (valueInput === "" || isNaN(value)) {
         document.getElementById("lootError").textContent = "Please enter a valid loot value.";
         return;
     }
 
-    // Validate: value must not be negative
+    // validating number is a positive
     if (value < 0) {
         document.getElementById("lootError").textContent = "Loot value cannot be negative.";
         return;
     }
 
-    // Store loot as an object with name and value properties
+    // storing the loots name and value
     var lootObject = {
         name: name,
         value: value
@@ -44,23 +44,23 @@ function addLoot() {
 
     lootItems.push(lootObject);
 
-    // Clear the input fields
+    // clearing the field for loot
     document.getElementById("lootName").value = "";
     document.getElementById("lootValue").value = "";
 
     renderLoot();
 }
 
-// Render the loot list and update the running total
+// updating loot list and total
 function renderLoot() {
 
     var list = document.getElementById("lootList");
     var runningTotal = document.getElementById("runningTotal");
 
-    // Clear the current list
+    // clearing list
     list.innerHTML = "";
 
-    // If no items, show empty message
+    // if no items, show empty msg
     if (lootItems.length === 0) {
         var emptyItem = document.createElement("li");
         emptyItem.className = "empty-msg";
@@ -70,7 +70,7 @@ function renderLoot() {
         return;
     }
 
-    // Loop to render each item and calculate the running total
+    // looping each item and total
     var total = 0;
 
     for (var i = 0; i < lootItems.length; i++) {
@@ -94,22 +94,22 @@ function renderLoot() {
     runningTotal.textContent = "$" + total.toFixed(2);
 }
 
-// Split the total loot evenly among party members
+// spliting the loot evenly
 function splitLoot() {
 
-    // Clear previous errors and results
+    // clearing any errors
     document.getElementById("splitError").textContent = "";
     document.getElementById("partySizeError").textContent = "";
     document.getElementById("splitTotal").textContent = "--";
     document.getElementById("splitPerMember").textContent = "--";
 
-    // Check that there is loot to split
+    // checking if loot is there to split
     if (lootItems.length === 0) {
         document.getElementById("splitError").textContent = "No loot to split! Add some items first.";
         return;
     }
 
-    // Validate party size
+    // checking party size
     var partySizeInput = document.getElementById("partySize").value.trim();
     var partySize = parseInt(partySizeInput);
 
@@ -123,17 +123,17 @@ function splitLoot() {
         return;
     }
 
-    // Loop to calculate the grand total
+    // looping to calc the grand total
     var grandTotal = 0;
 
     for (var i = 0; i < lootItems.length; i++) {
         grandTotal += lootItems[i].value;
     }
 
-    // Calculate each member's share
+    // calc each persons share
     var perMember = grandTotal / partySize;
 
-    // Display results
+    // display the results
     document.getElementById("splitTotal").textContent = "$" + grandTotal.toFixed(2);
     document.getElementById("splitPerMember").textContent = "$" + perMember.toFixed(2);
 }
