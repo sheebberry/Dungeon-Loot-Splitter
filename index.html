@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<!--title for project-->
     <header>
         <h1>Dungeon Loot Splitter</h1>
         <p class="subtitle">Divide the spoils. Honor the party.</p>
     </header>
 
     <main>
-
+<!-- setting up panels for each subsection-->
         <section class="panel" id="panel-party">
             <h2>Party Setup</h2>
             <label for="partySize">Number of Party Members:</label>
             <input type="number" id="partySize" min="1" placeholder="e.g. 4">
             <p class="error-msg" id="partySizeError"></p>
         </section>
-
+<!--loot section-->
         <section class="panel" id="panel-add">
             <h2>Add Loot</h2>
             <label for="lootName">Loot Name:</label>
@@ -32,7 +32,7 @@
             <p class="error-msg" id="lootError"></p>
             <button id="addLootBtn">Add Loot</button>
         </section>
-
+<!--adding loot and cost of loot section-->
         <section class="panel" id="panel-list">
             <h2>Loot List</h2>
             <ul id="lootList">
@@ -43,7 +43,7 @@
                 <span id="runningTotal">$0.00</span>
             </div>
         </section>
-
+<!--calculating the split for loot -->
         <section class="panel" id="panel-split">
             <h2>Split Loot</h2>
             <button id="splitLootBtn">Split Loot</button>
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </section>
-
+<!--explaining the code-->
         <section class="panel reflection" id="panel-logic">
             <h2>Logic Explanation</h2>
             <p> 

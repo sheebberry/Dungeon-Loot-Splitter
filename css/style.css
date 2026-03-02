@@ -1,4 +1,6 @@
-/* Dungeon Loot Splitter - style.css */
+/* Dungeon CSS */
+
+/* importing font used for project */
 
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Quicksand:wght@300..700&display=swap');
 
@@ -16,7 +18,7 @@ body {
     line-height: 1.6;
 }
 
-/* --- HEADER -------------------------------- */
+/* header */
 
 header {
     text-align: center;
@@ -41,7 +43,7 @@ header h1 {
     opacity: 80%;
 }
 
-/* --- MAIN ---------------------------------- */
+/* main section */
 
 main {
     max-width: 1100px;
@@ -52,7 +54,7 @@ main {
     gap: 16px;
 }
 
-/* --- PANELS -------------------------------- */
+/* panel for loot, party, split, and list */
 
 .panel {
     background-color: #1a1610;
@@ -71,7 +73,7 @@ main {
     padding-bottom: 8px;
 }
 
-/* --- LABELS & INPUTS ----------------------- */
+/* label names under the panel as explaining what is it */
 
 label {
     display: block;
@@ -100,7 +102,7 @@ input[type="number"]:focus {
     outline: 2px solid #e8b44a;
 }
 
-/* --- BUTTONS ------------------------------- */
+/* buttons pressed */
 
 button {
     display: inline-block;
@@ -119,7 +121,7 @@ button:hover {
     background-color: #5a4210;
 }
 
-/* --- LOOT LIST ----------------------------- */
+/* loot list and showing  */
 
 #lootList {
     list-style: none;
@@ -147,7 +149,7 @@ button:hover {
     font-style: italic;
 }
 
-/* --- TOTAL DISPLAY ------------------------- */
+/* total loot calc */
 
 .total-display {
     display: flex;
@@ -162,7 +164,7 @@ button:hover {
     color: #f0e0b0;
 }
 
-/* --- RESULTS AREA -------------------------- */
+/* showing end results/totals */
 
 .results-area {
     margin-top: 16px;
@@ -187,7 +189,7 @@ button:hover {
     font-size: 18px;
 }
 
-/* --- ERROR MESSAGES ------------------------ */
+/* error if mistake input */
 
 .error-msg {
     color: #ff9090;
@@ -196,7 +198,7 @@ button:hover {
     font-style: italic;
 }
 
-/* --- CODE TAG ------------------------------ */
+/* code tag for the reflextion page to make it fancy  */
 
 code {
     background-color: #2a2010;
@@ -214,7 +216,7 @@ code {
     font-size: 17px;
 }
 
-/* --- RESPONSIVE: >= 768px ------------------ */
+/* making the responsive 768px */
 
 @media (min-width: 768px) {
     main {
