@@ -19,36 +19,53 @@
         <section class="panel" id="panel-party">
             <h2>Party Setup</h2>
             <label for="partySize">Number of Party Members:</label>
-            <input type="number" id="partySize" min="1" placeholder="e.g. 4">
+            <input type="number" id="partySize" min="1" step="1" placeholder="e.g. 4">
             <p class="error-msg" id="partySizeError"></p>
         </section>
 <!--loot section-->
         <section class="panel" id="panel-add">
             <h2>Add Loot</h2>
-            <label for="lootName">Loot Name:</label>
-            <input type="text" id="lootName" placeholder="e.g. Golden Chalice">
-            <label for="lootValue">Loot Value:</label>
-            <input type="number" id="lootValue" min="0" step="0.01" placeholder="e.g. 150.00">
+            <div class="form-group">
+                <label for="lootName">Loot Name:</label>
+                <input type="text" id="lootName" placeholder="e.g. Golden Chalice">
+            </div>
+            <div class="form-group">
+                <label for="lootValue">Loot Value:</label>
+                <input type="number" id="lootValue" min="0" step="0.01" placeholder="e.g. 150.00">
+            </div>
+            <div class="form-group">
+                <label for="lootQuantity">Quantity:</label>
+                <input type="number" id="lootQuantity" min="1" step="1" placeholder="e.g. 1">
+            </div>
             <p class="error-msg" id="lootError"></p>
             <button id="addLootBtn">Add Loot</button>
         </section>
 <!--adding loot and cost of loot section-->
         <section class="panel" id="panel-list">
             <h2>Loot List</h2>
-            <ul id="lootList">
-                <li class="empty-msg">No loot added yet.</li>
-            </ul>
+
+            <div id="noLootMessage">No loot added.</div>
+
+            <div class="loot-table hidden" id="lootTable">
+                <div class="loot-header">Name</div>
+                <div class="loot-header">Value</div>
+                <div class="loot-header">Quantity</div>
+                <div class="loot-header">Remove</div>
+
+                <div id="lootRows"></div>
+            </div>
+
             <div class="total-display">
                 <span>Total Loot:</span>
-                <span id="runningTotal">$0.00</span>
+                <span id="totalLoot">$0.00</span>
             </div>
         </section>
 <!--calculating the split for loot -->
         <section class="panel" id="panel-split">
             <h2>Split Loot</h2>
-            <button id="splitLootBtn">Split Loot</button>
+            <button id="splitLootBtn" disabled>Split Loot</button>
             <p class="error-msg" id="splitError"></p>
-            <div class="results-area">
+            <div class="results-area hidden" id="resultsArea">
                 <div class="result-row">
                     <span>Total Loot:</span>
                     <span id="splitTotal">--</span>
@@ -62,18 +79,27 @@
 <!--explaining the code-->
         <section class="panel reflection" id="panel-logic">
             <h2>Logic Explanation</h2>
-            <p> 
-                The app uses one list called <code>lootItems</code> to store all the loot. This list is created at the top of 
-                the file, so it stays available the whole time the page is open. Every button can use and update the same list. 
-                Each loot item has two parts: a <code>name</code> (text) and a <code>value</code> (number). 
+            <p>
+                The app uses one array called <code>lootItems</code> to store all the loot. This array is created at the top of
+                the file, so it stays available the whole time the page is open. Every function can read and update the same array.
+                Each loot item is a plain object with three parts: a <code>name</code> (text), a <code>value</code> (number),
+                and a <code>quantity</code> (number). Quantity was added so one item can represent multiple copies without
+                needing a separate entry for each one.
             </p>
             <p>
-                When the user clicks "Add Loot," the <code>addLoot()</code> function checks a few things: 
-                the name can’t be empty, the value has to be a real number, and it can’t be negative. If everything is okay, 
-                the item is added to the list. Then <code>renderLoot()</code> runs. It uses a loop to go through all the items, 
-                show them on the screen, and calculate the total value. </p> <p> When the user clicks "Split Loot," 
-                the <code>splitLoot()</code> function adds up all the loot again. It checks that the party size is valid and 
-                that there is loot to split. If everything is valid, it divides the total amount evenly.
+                When the user clicks "Add Loot," the <code>addLoot()</code> function checks a few things:
+                the name can't be empty, the value has to be a real number, the value can't be negative,
+                and the quantity has to be 1 or greater. If everything is okay, the item is added to the array
+                and <code>updateUI()</code> runs immediately.
+            </p>
+            <p>
+                <code>updateUI()</code> is the only place where totals are calculated and the screen is updated.
+                It loops through the array, multiplies each item's value by its quantity to get the total,
+                rebuilds the loot list on screen, and then checks if the state is valid. If the array has items
+                and the party size is a valid number, the Split button becomes enabled and the results are shown.
+                If either of those is missing, the button stays disabled and the results stay hidden.
+                Removing an item calls <code>removeLoot()</code> which uses <code>splice()</code> to delete it
+                from the array, then calls <code>updateUI()</code> again. The array is always the source of truth.
             </p>
         </section>
 
