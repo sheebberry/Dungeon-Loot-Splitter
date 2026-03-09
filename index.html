@@ -80,26 +80,25 @@
         <section class="panel reflection" id="panel-logic">
             <h2>Logic Explanation</h2>
             <p>
-                The app uses one array called <code>lootItems</code> to store all the loot. This array is created at the top of
-                the file, so it stays available the whole time the page is open. Every function can read and update the same array.
-                Each loot item is a plain object with three parts: a <code>name</code> (text), a <code>value</code> (number),
-                and a <code>quantity</code> (number). Quantity was added so one item can represent multiple copies without
-                needing a separate entry for each one.
+                The app stores all loot in one array called <code>lootItems</code> Each item is an object with a name, value, 
+                and quantity. This array is created at the top of the file so all functions can access it, making 
+                it the main source of truth for the app.
             </p>
             <p>
-                When the user clicks "Add Loot," the <code>addLoot()</code> function checks a few things:
-                the name can't be empty, the value has to be a real number, the value can't be negative,
-                and the quantity has to be 1 or greater. If everything is okay, the item is added to the array
-                and <code>updateUI()</code> runs immediately.
+                When the Add Loot button is clicked, <code>addLoot()</code> validates the inputs to make sure the name is not 
+                empty, the value is a valid non-negative number, and the quantity is at least 1. If the inputs are valid, 
+                the new loot object is added to the array and updateUI() runs.
             </p>
             <p>
-                <code>updateUI()</code> is the only place where totals are calculated and the screen is updated.
-                It loops through the array, multiplies each item's value by its quantity to get the total,
-                rebuilds the loot list on screen, and then checks if the state is valid. If the array has items
-                and the party size is a valid number, the Split button becomes enabled and the results are shown.
-                If either of those is missing, the button stays disabled and the results stay hidden.
-                Removing an item calls <code>removeLoot()</code> which uses <code>splice()</code> to delete it
-                from the array, then calls <code>updateUI()</code> again. The array is always the source of truth.
+                <code>updateUI</code> is responsible for recalculating totals and updating the screen. 
+                It loops through the array to calculate total loot (value × quantity), rebuilds the loot list, 
+                and checks if the app state is valid. If loot exists and the party size is valid, the Split button 
+                is enabled and results are shown.
+            </p>
+            <p>
+                Each loot item has a Remove button that calls <code>removeLoot()</code>. This function 
+                removes the item from the array using splice() and then calls updateUI() so the interface 
+                updates to match the current data.
             </p>
         </section>
 
