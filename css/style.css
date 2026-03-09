@@ -121,6 +121,15 @@ button:hover {
     background-color: #5a4210;
 }
 
+/* disabled state for split button when state is invalid */
+
+button:disabled {
+    background-color: #1e1a10;
+    color: #6a5a38;
+    border-color: #3a3020;
+    cursor: not-allowed;
+}
+
 /* loot list and showing  */
 
 #lootList {
@@ -216,6 +225,74 @@ code {
     font-size: 17px;
 }
 
+/* hides elements when JS removes the class */
+
+.hidden {
+    display: none;
+}
+
+/* form groups keep each label and input together in the add loot panel */
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+/* loot table grid for the loot list panel */
+
+#noLootMessage {
+    color: #b0a080;
+    font-style: italic;
+    margin-bottom: 16px;
+}
+
+.loot-table {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.loot-header {
+    font-weight: bold;
+    color: #e8b44a;
+    border-bottom: 2px solid #5a4a2a;
+    padding-bottom: 6px;
+    font-size: 14px;
+}
+
+#lootRows {
+    display: contents;
+}
+
+.loot-row {
+    display: contents;
+}
+
+.loot-cell {
+    padding: 6px 0;
+    border-bottom: 1px solid #2e2818;
+    color: #d4c4a0;
+    font-size: 16px;
+}
+
+/* remove button inside the loot table */
+
+.remove-btn {
+    margin-top: 0;
+    padding: 4px 10px;
+    background-color: #3a1010;
+    color: #ff9090;
+    border: 1px solid #7a3030;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.remove-btn:hover {
+    background-color: #5a1a1a;
+}
+
 /* making the responsive 768px */
 
 @media (min-width: 768px) {
@@ -224,6 +301,15 @@ code {
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
+
+    .panel {
+        margin-bottom: 0;
+    }
+
+    #panel-party   { grid-column: 1; grid-row: 1; }
+    #panel-add     { grid-column: 2; grid-row: 1; }
+    #panel-list    { grid-column: 1; grid-row: 2; }
+    #panel-split   { grid-column: 2; grid-row: 2; }
 
     .reflection {
         grid-column: span 2;
