@@ -76,17 +76,17 @@ function removeLoot(index) {
 // single function that handles all rendering and calculations
 function updateUI() {
 
-    // --- calculate total loot ---
+    // calculate total loot
     var grandTotal = 0;
 
     for (var i = 0; i < lootItems.length; i++) {
         grandTotal += lootItems[i].value * lootItems[i].quantity;
     }
 
-    // update the running total display
+    // update the total display
     document.getElementById("totalLoot").textContent = "$" + grandTotal.toFixed(2);
 
-    // --- render the loot list ---
+    // render the loot list
     var lootRows = document.getElementById("lootRows");
     var noLootMessage = document.getElementById("noLootMessage");
     var lootTable = document.getElementById("lootTable");
@@ -142,7 +142,7 @@ function updateUI() {
         }
     }
 
-    // --- check if party size is valid ---
+    // check if party size is valid
     var partySizeInput = document.getElementById("partySize").value.trim();
     var partySize = parseInt(partySizeInput);
     var partyValid = partySizeInput !== "" && !isNaN(partySize) && partySize >= 1;
@@ -153,7 +153,7 @@ function updateUI() {
         document.getElementById("partySizeError").textContent = "Party size must be at least 1.";
     }
 
-    // --- enable or disable the split button ---
+    // enable or disable the split button
     var splitBtn = document.getElementById("splitLootBtn");
 
     if (lootItems.length > 0 && partyValid) {
@@ -162,7 +162,7 @@ function updateUI() {
         splitBtn.disabled = true;
     }
 
-    // --- show or hide results ---
+    // show or hide results
     var resultsArea = document.getElementById("resultsArea");
 
     if (lootItems.length > 0 && partyValid) {
@@ -177,7 +177,7 @@ function updateUI() {
     }
 }
 
-// split button calls updateUI - no calculation logic lives here
+// split button calls updateUI
 function splitLoot() {
     updateUI();
 }
